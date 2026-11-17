@@ -169,4 +169,5 @@ prompt-lab/
 
 - 使用 GitHub Pages：Settings → Pages → Branch 選 `main`、資料夾 `/ (root)`。
 - `index.html` 必須維持在根目錄。
+- 根目錄必須保留空白檔案 `.nojekyll`，**不可刪除**。否則 GitHub Pages 會用 Jekyll 處理檔案，本文件與範本中的 `{{ }}` 佔位符會被誤判為語法而導致建置失敗。
 - 推送後約 1～2 分鐘生效。
