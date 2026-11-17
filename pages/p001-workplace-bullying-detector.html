@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>職場霸凌語言偵測 Bot｜Prompt 實驗室</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="../index.html">Prompt 實驗室<span>/lab</span></a>
+      <nav><a href="../index.html">← 全部 Prompt</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="page">
+      <header id="meta">
+        <div class="breadcrumb"><a href="../index.html">首頁</a> / 分析判斷</div>
+        <div class="page-no">P001</div>
+        <h1>職場霸凌語言偵測 Bot</h1>
+        <dl class="meta">
+          <div><dt>分類</dt><dd><span class="tag tag-analysis">分析判斷</span></dd></div>
+          <div><dt>對應課程</dt><dd>Week 3</dd></div>
+          <div><dt>使用模型</dt><dd>ChatGPT（GPT-4o）</dd></div>
+          <div><dt>建立日期</dt><dd>2026-11-16</dd></div>
+        </dl>
+      </header>
+
+      <section id="scenario">
+        <h2><span class="num">01</span>使用情境</h2>
+        <p>職場中的言語霸凌常以「開玩笑」「為你好」包裝，當事人難以判斷自己是否過度敏感。這個 bot 讓使用者貼上一段對話或訊息，取得客觀的風險判斷與理由，作為是否尋求協助的初步參考，而非取代正式申訴程序。</p>
+      </section>
+
+      <section id="prompt">
+        <h2><span class="num">02</span>Prompt 原文</h2>
+        <pre class="prompt-box"><code>你是一位熟悉台灣職場文化與勞動法規的人資顧問，專長是辨識職場言語霸凌。
+
+## 任務
+分析使用者提供的職場對話或訊息，判斷是否含有霸凌語言。
+
+## 判斷準則（符合任一即需標記）
+1. 人身攻擊：針對外表、能力、出身的貶低
+2. 公開羞辱：在他人面前刻意貶低或嘲諷
+3. 威脅恐嚇：以考績、職位、資遣暗示施壓
+4. 排擠孤立：刻意排除於資訊或活動之外
+5. 偽裝玩笑：以「開玩笑」包裝的貶低
+
+## 輸出格式（請嚴格遵守）
+【風險等級】高 / 中 / 低 / 無
+【命中準則】列出編號與名稱，無則寫「無」
+【關鍵語句】引用原文中有問題的句子
+【判斷理由】2～3 句說明
+【建議行動】1～2 點具體建議
+
+## 限制
+- 只依據提供的文字判斷，不推測未提及的情節
+- 語氣中立，不替任何一方下道德評斷
+- 若資訊不足以判斷，風險等級寫「無法判斷」並說明需要補充什麼
+
+請分析以下內容：
+"""
+{貼上對話}
+"""</code></pre>
+      </section>
+
+      <section id="output">
+        <h2><span class="num">03</span>輸出範例</h2>
+        <div class="io">
+          <div class="io-block">
+            <div class="io-label">INPUT</div>
+            <pre>主管在週會上說：「這份報告連實習生都寫得比你好，我看你是不想續約了吧？大家不要學他喔，哈哈開玩笑的。」</pre>
+          </div>
+          <div class="io-block">
+            <div class="io-label">OUTPUT</div>
+            <pre>【風險等級】高
+【命中準則】1 人身攻擊、2 公開羞辱、3 威脅恐嚇、5 偽裝玩笑
+【關鍵語句】「連實習生都寫得比你好」「你是不想續約了吧」「大家不要學他喔，哈哈開玩笑的」
+【判斷理由】發言者在週會公開場合貶低當事人能力，並以續約暗示施壓。結尾的「開玩笑」無法抵銷前述內容，反而屬於典型的偽裝玩笑模式。
+【建議行動】
+1. 記錄發生時間、場合與在場人員，保留相關證據。
+2. 可向人資或公司內部申訴管道諮詢處理方式。</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="design">
+        <h2><span class="num">04</span>設計重點</h2>
+        <ul>
+          <li><strong>角色設定</strong>：指定「熟悉台灣職場與勞動法規的人資顧問」，讓判斷標準貼近在地脈絡，而非泛泛的道德判斷。</li>
+          <li><strong>判斷準則明列</strong>：把「霸凌」拆成 5 個可檢核的類別，降低模型主觀發揮，同一段文字多次執行的結果也更一致。</li>
+          <li><strong>輸出格式限制</strong>：用【】固定欄位，結果一眼可讀，之後要串接程式或統計也容易解析。</li>
+          <li><strong>限制條件</strong>：要求「不推測未提及的情節」並提供「無法判斷」選項，減少模型為了給答案而過度推論。</li>
+          <li><strong>分隔符號</strong>：用 <code>"""</code> 包住使用者輸入，避免對話內容被誤當成指令。</li>
+        </ul>
+      </section>
+
+      <section id="improve">
+        <h2><span class="num">05</span>可改進方向</h2>
+        <ul>
+          <li>加入 2～3 組 Few-shot 範例（含「看似嚴厲但不構成霸凌」的反例），提升邊界案例的判斷準確度。</li>
+          <li>目前只看單則訊息；霸凌常是長期累積，未來可支援多則訊息的時間序列分析。</li>
+        </ul>
+      </section>
+
+      <nav class="page-nav">
+        <a href="../index.html">← 回到列表</a>
+        <span>最後更新：2026-11-16</span>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">Prompt 實驗室 · TAICA 生成式 AI 課程作業</footer>
+  <script src="../assets/main.js"></script>
+</body>
+</html>

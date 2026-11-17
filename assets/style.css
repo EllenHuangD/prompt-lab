@@ -1,0 +1,131 @@
+/* Prompt 實驗室 — 全站唯一樣式表。修改規則見 AGENTS.md 第 5、9 節 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --bg: #f7f4ec;
+  --paper: #fffdf7;
+  --ink: #1f2a24;
+  --muted: #6b7a70;
+  --line: #ddd6c6;
+  --accent: #2f5d50;
+  --accent-soft: #e3ece7;
+  --tag-text: #2f5d50;
+  --tag-text-bg: #e3ece7;
+  --tag-image: #8a4b2a;
+  --tag-image-bg: #f5e6dc;
+  --tag-analysis: #3b4f86;
+  --tag-analysis-bg: #e2e7f4;
+  --code-bg: #1f2a24;
+  --code-ink: #e9efe9;
+  --font-sans: "Noto Sans TC", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.75;
+  /* 淡淡的方格紙背景：實驗紀錄本感 */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
+}
+a { color: var(--accent); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- 頁首 ---------- */
+.site-header { background: var(--accent); color: #fff; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
+.logo { color: #fff; text-decoration: none; font-weight: 700; letter-spacing: .05em; }
+.logo span { font-family: var(--font-mono); opacity: .75; font-weight: 400; margin-left: 6px; font-size: .85em; }
+.site-header nav a { color: #fff; opacity: .85; text-decoration: none; font-size: .9rem; }
+
+/* ---------- 首頁 Hero ---------- */
+.hero { padding: 56px 0 28px; }
+.hero h1 { font-size: 2.2rem; margin: 0 0 8px; }
+.hero p { color: var(--muted); margin: 0; max-width: 620px; }
+.hero .stat { font-family: var(--font-mono); color: var(--accent); margin-top: 14px; font-size: .9rem; }
+
+/* ---------- 篩選 ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 22px; }
+.filters button {
+  font: inherit; font-size: .9rem; cursor: pointer;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+  border-radius: 999px; padding: 4px 14px;
+}
+.filters button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ---------- 卡片 ---------- */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; padding-bottom: 48px; }
+.card {
+  display: block; text-decoration: none; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 18px 14px; position: relative; transition: transform .15s, box-shadow .15s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(31, 42, 36, .08); }
+.card h3 { margin: 10px 0 4px; font-size: 1.08rem; }
+.card p { margin: 0; color: var(--muted); font-size: .9rem; }
+.card-no { position: absolute; top: 16px; right: 16px; font-family: var(--font-mono); color: var(--muted); font-size: .8rem; }
+.card.hidden { display: none; }
+
+/* ---------- 標籤（分類，見 AGENTS.md 第 4 節） ---------- */
+.tag { display: inline-block; font-size: .78rem; font-weight: 500; padding: 1px 10px; border-radius: 999px; }
+.tag-text { color: var(--tag-text); background: var(--tag-text-bg); }
+.tag-image { color: var(--tag-image); background: var(--tag-image-bg); }
+.tag-analysis { color: var(--tag-analysis); background: var(--tag-analysis-bg); }
+
+/* ---------- 內頁 ---------- */
+.page { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 40px; margin: 32px 0 48px; }
+.breadcrumb { font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+.breadcrumb a { text-decoration: none; }
+.page-no { font-family: var(--font-mono); color: var(--accent); font-size: .9rem; }
+.page h1 { margin: 2px 0 16px; font-size: 1.9rem; line-height: 1.35; }
+.meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 0 0 8px; padding: 14px 16px; background: var(--accent-soft); border-radius: 8px; }
+.meta div { margin: 0; }
+.meta dt { font-size: .75rem; color: var(--muted); }
+.meta dd { margin: 0; font-weight: 500; font-size: .95rem; }
+
+.page section { margin-top: 34px; }
+.page h2 { font-size: 1.2rem; border-left: 4px solid var(--accent); padding-left: 10px; margin: 0 0 12px; }
+.page h2 .num { font-family: var(--font-mono); color: var(--muted); font-weight: 400; margin-right: 6px; }
+.page li { margin-bottom: 6px; }
+
+/* ---------- Prompt 區塊 ---------- */
+.prompt-wrap { position: relative; }
+.prompt-box {
+  background: var(--code-bg); color: var(--code-ink); border-radius: 8px;
+  padding: 18px 20px; overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+  font-family: var(--font-mono); font-size: .88rem; line-height: 1.7; margin: 0;
+}
+.copy-btn {
+  position: absolute; top: 10px; right: 10px; cursor: pointer;
+  font: inherit; font-size: .78rem; padding: 3px 10px; border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .1); color: #fff;
+}
+.copy-btn.done { background: var(--accent); border-color: var(--accent); }
+
+/* ---------- 輸出範例 ---------- */
+.io { display: grid; gap: 10px; }
+.io-block { border: 1px dashed var(--line); border-radius: 8px; padding: 12px 16px; }
+.io-label { font-family: var(--font-mono); font-size: .75rem; color: var(--muted); letter-spacing: .08em; }
+.io-block p, .io-block pre { margin: 4px 0 0; }
+.io-block pre { white-space: pre-wrap; font-family: var(--font-sans); }
+.page img { max-width: 100%; border-radius: 8px; }
+
+/* ---------- 頁尾 ---------- */
+.page-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .9rem; }
+.site-footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 0 0 32px; }
+
+@media (max-width: 600px) {
+  .page { padding: 24px 20px; }
+  .hero h1 { font-size: 1.7rem; }
+}
+
+/* === 擴充區 === */
+/* 新增樣式請寫在這裡，並註明用途與對應頁面編號 */

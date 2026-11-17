@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>公告海報插圖生成｜Prompt 實驗室</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="../index.html">Prompt 實驗室<span>/lab</span></a>
+      <nav><a href="../index.html">← 全部 Prompt</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="page">
+      <header id="meta">
+        <div class="breadcrumb"><a href="../index.html">首頁</a> / 圖像生成</div>
+        <div class="page-no">P002</div>
+        <h1>公告海報插圖生成</h1>
+        <dl class="meta">
+          <div><dt>分類</dt><dd><span class="tag tag-image">圖像生成</span></dd></div>
+          <div><dt>對應課程</dt><dd>延伸練習</dd></div>
+          <div><dt>使用模型</dt><dd>Stable Diffusion XL</dd></div>
+          <div><dt>建立日期</dt><dd>2026-11-16</dd></div>
+        </dl>
+      </header>
+
+      <section id="scenario">
+        <h2><span class="num">01</span>使用情境</h2>
+        <p>行政單位常需要製作內部公告海報，例如洗手宣導、防火演練、資安提醒，但找圖費時又可能有版權問題。這組 prompt 用固定的風格描述，讓每次生成的插圖維持一致的視覺調性，只要替換「主題」就能產生系列插圖。</p>
+      </section>
+
+      <section id="prompt">
+        <h2><span class="num">02</span>Prompt 原文</h2>
+        <pre class="prompt-box"><code>Positive prompt:
+flat vector illustration, {主題：friendly nurse demonstrating hand washing at a sink},
+clean minimal composition, soft rounded shapes,
+muted teal and warm beige color palette, plenty of white space at top for text,
+friendly and calm mood, simple background, poster style, high quality
+
+Negative prompt:
+text, letters, watermark, logo, realistic photo, 3d render,
+blood, needles, scary, cluttered background, extra fingers, deformed hands
+
+Settings:
+size 1024x1024, steps 30, CFG 7, sampler DPM++ 2M Karras</code></pre>
+      </section>
+
+      <section id="output">
+        <h2><span class="num">03</span>輸出範例</h2>
+        <div class="io">
+          <div class="io-block">
+            <div class="io-label">INPUT</div>
+            <pre>主題替換為：friendly nurse demonstrating hand washing at a sink</pre>
+          </div>
+          <div class="io-block">
+            <div class="io-label">OUTPUT</div>
+            <pre>（待補：實際執行結果圖片，存放於 assets/img/p002-output-1.png）
+預期畫面：扁平插畫風格的護理師在洗手台前示範洗手，以藍綠與米色為主色，畫面上方留白，可直接疊加公告標題文字。</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="design">
+        <h2><span class="num">04</span>設計重點</h2>
+        <ul>
+          <li><strong>風格指定</strong>：固定「flat vector illustration＋色票＋氛圍」三組描述，不同主題的插圖就能形成同一系列。</li>
+          <li><strong>任務拆解</strong>：把「主題」獨立成 <code>{主題}</code> 變數，其餘描述不動，換主題時只需改一處。</li>
+          <li><strong>版面預留</strong>：加入 "white space at top for text"，生成的圖可直接當海報底圖使用。</li>
+          <li><strong>負面提示（Negative prompt）</strong>：排除文字、浮水印（模型生成的文字通常是亂碼），以及醫療場景中容易引起不適的元素（blood、needles）。</li>
+        </ul>
+      </section>
+
+      <section id="improve">
+        <h2><span class="num">05</span>可改進方向</h2>
+        <ul>
+          <li>手部仍容易變形，可嘗試搭配 ControlNet 或改成不強調手部的構圖。</li>
+          <li>固定 seed 值，測試同一系列插圖在角色外觀上的一致性。</li>
+        </ul>
+      </section>
+
+      <nav class="page-nav">
+        <a href="../index.html">← 回到列表</a>
+        <span>最後更新：2026-11-16</span>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">Prompt 實驗室 · TAICA 生成式 AI 課程作業</footer>
+  <script src="../assets/main.js"></script>
+</body>
+</html>

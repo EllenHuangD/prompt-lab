@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>行政公告白話改寫助手｜Prompt 實驗室</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="../index.html">Prompt 實驗室<span>/lab</span></a>
+      <nav><a href="../index.html">← 全部 Prompt</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="page">
+      <header id="meta">
+        <div class="breadcrumb"><a href="../index.html">首頁</a> / 文字生成</div>
+        <div class="page-no">P003</div>
+        <h1>行政公告白話改寫助手</h1>
+        <dl class="meta">
+          <div><dt>分類</dt><dd><span class="tag tag-text">文字生成</span></dd></div>
+          <div><dt>對應課程</dt><dd>延伸練習</dd></div>
+          <div><dt>使用模型</dt><dd>ChatGPT（GPT-4o）</dd></div>
+          <div><dt>建立日期</dt><dd>2026-11-16</dd></div>
+        </dl>
+      </header>
+
+      <section id="scenario">
+        <h2><span class="num">01</span>使用情境</h2>
+        <p>正式公文用語精確但不易閱讀，同仁常只看標題就略過，導致重要事項被漏掉。這個 prompt 把公文改寫成可直接貼到內部群組或內網的白話公告，並自動整理出「要做什麼、什麼時候前完成」。</p>
+      </section>
+
+      <section id="prompt">
+        <h2><span class="num">02</span>Prompt 原文</h2>
+        <pre class="prompt-box"><code>你是行政單位的內部溝通專員，擅長把正式公文改寫成同仁一看就懂的公告。
+
+請依照以下步驟處理我提供的公文：
+步驟 1：找出這份公文要同仁「做什麼」「什麼時候前」「影響誰」
+步驟 2：用白話改寫，句子簡短，避免「爰」「茲」「惠請」等公文用語
+步驟 3：依照下方格式輸出
+
+## 輸出格式
+📢 標題（15 字以內，直接講重點）
+
+一句話摘要：……
+
+✅ 你需要做的事
+1. ……
+2. ……
+
+📅 截止日期：YYYY/MM/DD（若無則寫「無」）
+👥 適用對象：……
+📎 原文依據：公文字號（若有）
+
+## 限制
+- 不可新增原文沒有的規定或日期
+- 原文不明確之處，用「（請確認：……）」標註，不要自行推測
+- 全文 200 字以內
+
+公文內容：
+"""
+{貼上公文}
+"""</code></pre>
+      </section>
+
+      <section id="output">
+        <h2><span class="num">03</span>輸出範例</h2>
+        <div class="io">
+          <div class="io-block">
+            <div class="io-label">INPUT（虛構公文）</div>
+            <pre>主旨：為落實個人資料保護，請各單位同仁於本年12月15日前完成年度資訊安全教育訓練線上課程，請查照。
+說明：一、依本院資訊安全管理辦法第8條辦理。二、課程時數3小時，完成後系統自動登錄時數。三、未完成者將列入年度考核參考。</pre>
+          </div>
+          <div class="io-block">
+            <div class="io-label">OUTPUT</div>
+            <pre>📢 資安線上課程 12/15 前要上完
+
+一句話摘要：全體同仁需在 12/15 前完成 3 小時的資安線上課程，未完成會影響年度考核。
+
+✅ 你需要做的事
+1. 登入線上學習系統，完成「年度資訊安全教育訓練」課程（3 小時）
+2. 完成後系統會自動登錄時數，不需另外回報
+
+📅 截止日期：2026/12/15
+👥 適用對象：各單位全體同仁
+📎 原文依據：（請確認：公文字號）</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="design">
+        <h2><span class="num">04</span>設計重點</h2>
+        <ul>
+          <li><strong>思考步驟引導</strong>：先「擷取重點」再「改寫」，避免模型邊寫邊漏掉日期或對象等關鍵資訊。</li>
+          <li><strong>輸出格式限制</strong>：固定的 emoji 欄位讓同仁在群組裡快速掃讀，「你需要做的事」放在最前面。</li>
+          <li><strong>負面清單</strong>：直接列出要避免的公文用語，比只說「白話一點」更具體、可執行。</li>
+          <li><strong>限制條件</strong>：禁止新增原文沒有的內容，不確定之處以「（請確認）」標註，降低行政文件出錯的風險。</li>
+        </ul>
+      </section>
+
+      <section id="improve">
+        <h2><span class="num">05</span>可改進方向</h2>
+        <ul>
+          <li>原文沒寫年份時，模型可能自行補上年份，需人工確認日期。</li>
+          <li>可增加「語氣」參數（正式／親切），對應不同的發布管道。</li>
+        </ul>
+      </section>
+
+      <nav class="page-nav">
+        <a href="../index.html">← 回到列表</a>
+        <span>最後更新：2026-11-16</span>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">Prompt 實驗室 · TAICA 生成式 AI 課程作業</footer>
+  <script src="../assets/main.js"></script>
+</body>
+</html>

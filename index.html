@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt 實驗室｜可重複使用的 Prompt 作品集</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html">Prompt 實驗室<span>/lab</span></a>
+      <nav><a href="https://github.com/">GitHub</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Prompt 實驗室</h1>
+      <p>收錄我在「生成式 AI：文字與圖像生成的原理與實務」課程與工作中實際設計、測試過的 prompt。每一頁都有使用情境、可直接複製的原文、輸出範例，以及「為什麼這樣寫」。</p>
+      <div class="stat">// 目前收錄 <span id="count">3</span> 個 prompt</div>
+    </section>
+
+    <!-- 篩選按鈕：分類需與 AGENTS.md 第 4 節一致 -->
+    <div class="filters">
+      <button type="button" class="active" data-filter="all">全部</button>
+      <button type="button" data-filter="text">文字生成</button>
+      <button type="button" data-filter="image">圖像生成</button>
+      <button type="button" data-filter="analysis">分析判斷</button>
+    </div>
+
+    <!-- 新卡片請加在最前面（新的在上），格式見 AGENTS.md 第 7 節 -->
+    <div class="card-grid">
+      <a class="card" href="pages/p003-official-notice-rewriter.html" data-category="text">
+        <span class="card-no">P003</span>
+        <span class="tag tag-text">文字生成</span>
+        <h3>行政公告白話改寫助手</h3>
+        <p>把正式公文改寫成同仁一看就懂的群組公告</p>
+      </a>
+      <a class="card" href="pages/p002-hospital-notice-illustration.html" data-category="image">
+        <span class="card-no">P002</span>
+        <span class="tag tag-image">圖像生成</span>
+        <h3>公告海報插圖生成</h3>
+        <p>固定風格描述，換主題就能產生系列插圖</p>
+      </a>
+      <a class="card" href="pages/p001-workplace-bullying-detector.html" data-category="analysis">
+        <span class="card-no">P001</span>
+        <span class="tag tag-analysis">分析判斷</span>
+        <h3>職場霸凌語言偵測 Bot</h3>
+        <p>依 5 項準則判斷職場對話的霸凌風險</p>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">Prompt 實驗室 · TAICA 生成式 AI 課程作業 · 規則見 AGENTS.md</footer>
+  <script src="assets/main.js"></script>
+</body>
+</html>
